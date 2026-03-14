@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReadWave — Твое пространство для чтения</title>
+    <title>ReadWave — Тысячи историй в одном месте</title>
     <style>
-        /* --- Базовые настройки --- */
         :root {
             --bg-deep: #05070a;
             --text-main: #ffffff;
             --text-dim: rgba(255, 255, 255, 0.6);
             --glass: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-blue: #0047ff;
         }
 
         * {
@@ -31,57 +31,31 @@
             overflow-x: hidden;
         }
 
-        /* --- ТОЧНЫЙ ДИЗАЙН ФОНА --- */
+        /* --- ФОН (Aurora Mesh) --- */
         .background-container {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            overflow: hidden;
             background: var(--bg-deep);
         }
 
-        /* Пятна света как на скриншоте */
         .light-blob {
             position: absolute;
             border-radius: 50%;
             filter: blur(80px);
-            opacity: 0.5;
-            animation: drift 25s infinite alternate ease-in-out;
+            opacity: 0.4;
+            animation: drift 20s infinite alternate ease-in-out;
         }
 
-        /* Бирюзовый сверху слева */
-        .blob-1 {
-            width: 45vw; height: 45vw;
-            top: -10%; left: -5%;
-            background: radial-gradient(circle, #00ced1 0%, transparent 70%);
-        }
-
-        /* Мятный в центре слева */
-        .blob-2 {
-            width: 40vw; height: 40vw;
-            top: 30%; left: -15%;
-            background: radial-gradient(circle, #43ffaf 0%, transparent 70%);
-            opacity: 0.3;
-            animation-duration: 35s;
-        }
-
-        /* Яркий синий снизу справа */
-        .blob-3 {
-            width: 55vw; height: 55vw;
-            bottom: -10%; right: -10%;
-            background: radial-gradient(circle, #0047ff 0%, transparent 70%);
-            opacity: 0.6;
-        }
+        .blob-1 { width: 50vw; height: 50vw; top: -10%; left: -5%; background: radial-gradient(circle, #00ced1 0%, transparent 70%); }
+        .blob-2 { width: 40vw; height: 40vw; top: 30%; left: -15%; background: radial-gradient(circle, #43ffaf 0%, transparent 70%); opacity: 0.2; }
+        .blob-3 { width: 60vw; height: 60vw; bottom: -10%; right: -10%; background: radial-gradient(circle, var(--accent-blue) 0%, transparent 70%); }
 
         @keyframes drift {
-            from { transform: translate(0, 0) rotate(0deg) scale(1); }
-            to { transform: translate(50px, 30px) rotate(10deg) scale(1.1); }
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(40px, 20px) scale(1.1); }
         }
 
-        /* Зернистость (Grain) */
         .noise {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -91,13 +65,13 @@
             z-index: 0;
         }
 
-        /* --- ИНТЕРФЕЙС --- */
+        /* --- КОНТЕНТ --- */
         .content {
             position: relative;
             z-index: 10;
-            max-width: 500px;
-            width: 90%;
-            margin-top: 15vh;
+            max-width: 650px;
+            width: 92%;
+            margin: 10vh 0 5vh;
             text-align: center;
         }
 
@@ -107,82 +81,84 @@
             -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
             border-radius: 40px;
-            padding: 50px 30px;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+            padding: 40px 30px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
         }
 
         .app-icon {
-            width: 100px;
-            height: 100px;
+            width: 90px; height: 90px;
             background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-            border-radius: 24px;
-            margin: 0 auto 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 45px;
-            box-shadow: 0 20px 40px rgba(0, 163, 255, 0.3);
+            border-radius: 22px;
+            margin: 0 auto 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 15px 35px rgba(0, 163, 255, 0.3);
         }
 
         h1 {
-            font-size: 2.2rem;
-            letter-spacing: -1px;
-            margin-bottom: 15px;
+            font-size: 2rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 800;
         }
 
         .description {
             color: var(--text-dim);
-            font-size: 1rem;
+            font-size: 1.05rem;
             line-height: 1.6;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
+            text-align: left;
         }
 
-        /* Кнопка RuStore */
+        /* Кнопка */
         .btn-download {
             display: inline-flex;
             align-items: center;
             background: #ffffff;
             color: #000;
-            padding: 18px 35px;
-            border-radius: 20px;
+            padding: 16px 40px;
+            border-radius: 18px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1.1rem;
             transition: all 0.3s ease;
         }
 
         .btn-download:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
-            background: #f0f0f0;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
         }
 
-        .btn-download img {
-            width: 24px;
-            margin-right: 12px;
-        }
-
-        .features {
-            margin-top: 50px;
+        /* Список возможностей */
+        .feature-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
         }
 
-        .feature-item {
-            background: rgba(255, 255, 255, 0.02);
+        .feature-tag {
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--glass-border);
-            padding: 20px;
-            border-radius: 24px;
-            font-size: 0.9rem;
-            color: var(--text-dim);
+            padding: 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-main);
         }
 
         footer {
             margin-top: auto;
-            padding: 40px;
+            padding: 30px;
             font-size: 0.8rem;
             color: rgba(255,255,255,0.2);
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; }
+            .description { font-size: 0.95rem; }
         }
     </style>
 </head>
@@ -198,24 +174,33 @@
     <div class="content">
         <div class="glass-card">
             <div class="app-icon">📖</div>
-            <h1>ReadWave</h1>
-            <p class="description">
-                Твой персональный океан книг. Читай с комфортом, настраивай под себя и погружайся в сюжет без лишних деталей.
-            </p>
+            <h1>Тысячи книг, манги, комиксов и фанфиков — всё в одном месте</h1>
             
-            <a href="https://www.rustore.ru/catalog/app/com.readwave" class="btn-download" target="_blank">
-                <span>Скачать в RuStore</span>
-            </a>
+            <p class="description">
+                Откройте для себя мир историй в одном приложении. Читайте книги, мангу, комиксы и фанфики — всё удобно собрано в одном месте. 
+                Находите новые произведения, сохраняйте любимые истории в библиотеку и продолжайте чтение с того места, где остановились. 
+                Удобный интерфейс и комфортный режим чтения помогут полностью погрузиться в историю.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-tag">📚 Книги всех жанров</div>
+                <div class="feature-tag">🎌 Манга и комиксы</div>
+                <div class="feature-tag">✍️ Авторские фанфики</div>
+                <div class="feature-tag">⭐ Избранное</div>
+                <div class="feature-tag">📖 Сохранение прогресса</div>
+                <div class="feature-tag">🔎 Умный поиск</div>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <a href="https://www.rustore.ru/catalog/app/com.readwave" class="btn-download" target="_blank">
+                    Скачать в RuStore
+                </a>
+            </div>
         </div>
 
-        <div class="features">
-            <div class="feature-item">
-                <strong>Minimal UI</strong><br>Ничего лишнего
-            </div>
-            <div class="feature-item">
-                <strong>Light Speed</strong><br>Работает быстро
-            </div>
-        </div>
+        <p style="color: var(--text-dim); font-size: 0.9rem; padding: 0 20px;">
+            Новые истории и главы появляются регулярно, поэтому вам всегда будет что почитать — дома, в дороге или перед сном.
+        </p>
     </div>
 
     <footer>
